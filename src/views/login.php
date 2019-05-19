@@ -1,47 +1,5 @@
 <?php
-session_start();
- 
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: home.php");
-    exit;
-}
- 
-require_once(dirname(__FILE__).'\..\db\user_repository.php');
-
- 
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
- 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter username.";
-    } else {
-        $username = trim($_POST["username"]);
-    }
-    
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter your password.";
-    } else {
-        $password = trim($_POST["password"]);
-    }
-    
-    if (empty($username_err) && empty($password_err)) {
-        $userRepository = new UserRepository();
-        $hash = $userRepository->getPasswordHash($username);
-            
-        if (password_verify($password, $hash)) {
-            session_start();
-          
-            $_SESSION["loggedin"] = true;
-            $_SESSION["id"] = $id;
-            $_SESSION["username"] = $username;
-          
-            header("location: home.php");
-        } else {
-            $login_err = "The credentials you entered was not valid.";
-        }
-    }
-}
+	require_once(dirname(__FILE__).'\..\managers\login_manager.php');
 ?>
  
 <!DOCTYPE html>

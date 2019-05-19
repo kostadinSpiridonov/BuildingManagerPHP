@@ -10,8 +10,8 @@ class ImageUtilities
 
         return self::TARGET_DIR . $this->generateFileName() . "." . $type;
     }
-
-    public function getFileType(string $name) : string
+	
+	public function getFileType(string $name) : string
     {
         return strtolower(pathinfo(basename($name), PATHINFO_EXTENSION));
     }

@@ -1,10 +1,8 @@
-
 <?php 
+require_once(dirname(__FILE__).'\..\managers\authentication_manager.php');
 session_start();
-$loggedin=false;
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    $loggedin=true;
-} ?>
+$loggedin = isLoggedIn();
+?>
 
  <!DOCTYPE html>
 <html lang="en">
