@@ -12,46 +12,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/home.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-    <style >
-        .building{
-            border: 5px solid transparent;
-            padding: 5px;
-            height:300px;
-            opacity:0.9;
-        }
-        .building:hover { 
-            cursor: pointer;
-            border: 2px solid transparent;
-            opacity:1;
-        }
-        .cover-image{
-            width:100%;
-            height:100%;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .building-heading{
-            width: 100%;
-            text-align: center;
-            margin: 0px;
-            background-color: #12101094;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            color: white;
-        }
-        .create-button{
-            margin-top: 20px;
-            margin-left: 23px;
-        }
-    </style>
- 
 </head>
 <body>
     <div class="wrapper">

@@ -1,0 +1,9 @@
+.error {
+    color: #FF0000;
+}
+
+#map {
+    height: 300px;
+    margin-bottom: 10px;
+    z-index: 0;
+}

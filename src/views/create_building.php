@@ -61,17 +61,17 @@ function validateForm() : bool
 <html>
 <head>
     <title>Image Upload</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-    
-    <script src="../../js/fileinput.min.js"></script>
-    <link rel="stylesheet" href="../../css/fileinput.min.css">
-    <style>
-        .error { color: #FF0000; }
-        #map { height: 300px; margin-bottom:10px; z-index:0; }
-    </style>
+	<script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
+	<script src="https://cdn.jsdelivr.net/leaflet/1/leaflet.js"></script>
+    <script src="../../js/file_input.min.js"></script>
+	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1/leaflet.css" />
+    <link rel="stylesheet" href="../../css/file_input.min.css">
+    <link rel="stylesheet" href="../../css/create_building.css">
 </head>
 <body>
     <div class="row centered-form center-block">
@@ -105,107 +105,7 @@ function validateForm() : bool
             </form>
         </div>
     </div>
+	
+    <script src="../../js/create_building.js"></script>
 </body>
-<script>
-    $(document).ready(function () {
-        $("#images").fileinput({
-            showUpload: false
-        });
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1/leaflet.css" />
-<script src="https://cdn.jsdelivr.net/leaflet/1/leaflet.js"></script>
-<script>
-(function() {
-  var placesAutocomplete = places({
-    appId: 'plY79MGQ3R5U',
-    apiKey: '556e9569d373015727a1a371481c4b09',
-    container: document.querySelector('#locationInput')
-  });
-
-  var map = L.map('map', {
-    scrollWheelZoom: false,
-    zoomControl: false
-  });
-
-  var osmLayer = new L.TileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 1,
-      maxZoom: 13,
-      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-    }
-  );
-
-  var markers = [];
-
-  map.setView(new L.LatLng(0, 0), 1);
-  map.addLayer(osmLayer);
-
-  placesAutocomplete.on('suggestions', handleOnSuggestions);
-  placesAutocomplete.on('cursorchanged', handleOnCursorchanged);
-  placesAutocomplete.on('change', handleOnChange);
-  placesAutocomplete.on('clear', handleOnClear);
-
-  function handleOnSuggestions(e) {
-    markers.forEach(removeMarker);
-    markers = [];
-
-    if (e.suggestions.length === 0) {
-      map.setView(new L.LatLng(0, 0), 1);
-      return;
-    }
-
-    e.suggestions.forEach(addMarker);
-    findBestZoom();
-  }
-
-  function handleOnChange(e) {
-    markers
-      .forEach(function(marker, markerIndex) {
-        if (markerIndex === e.suggestionIndex) {
-          markers = [marker];
-          marker.setOpacity(1);
-          findBestZoom();
-        $("#location").val(marker._latlng.lat+","+marker._latlng.lng);
-        } else {
-          removeMarker(marker);
-        }
-      });
-  }
-
-  function handleOnClear() {
-    map.setView(new L.LatLng(0, 0), 1);
-    markers.forEach(removeMarker);
-  }
-
-  function handleOnCursorchanged(e) {
-    markers
-      .forEach(function(marker, markerIndex) {
-        if (markerIndex === e.suggestionIndex) {
-          marker.setOpacity(1);
-          marker.setZIndexOffset(1000);
-        } else {
-          marker.setZIndexOffset(0);
-          marker.setOpacity(0.5);
-        }
-      });
-  }
-
-  function addMarker(suggestion) {
-    var marker = L.marker(suggestion.latlng, {opacity: .4});
-    marker.addTo(map);
-    markers.push(marker);
-  }
-
-  function removeMarker(marker) {
-    map.removeLayer(marker);
-  }
-
-  function findBestZoom() {
-    var featureGroup = L.featureGroup(markers);
-    map.fitBounds(featureGroup.getBounds().pad(0.5), {animate: false});
-  }
-})();
-</script>
 </html>
