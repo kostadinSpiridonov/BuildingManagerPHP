@@ -6,7 +6,8 @@
 <html>
 <head>
     <title>Image Upload</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
@@ -20,7 +21,7 @@
 </head>
 <body>
     <div class="row centered-form center-block">
-        <div class="container col-md-6 col-md-offset-3">
+        <div class="container col-md-6 col-xs-12 col-md-offset-3">
             <h1>Create a buidling</h1>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
                 <div class="form-group">

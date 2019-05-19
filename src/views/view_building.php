@@ -21,35 +21,37 @@
     <script src="../../js/baguette_box.min.js"></script>
 </head>
 <body>
-	<div>
-		<div class="col-md-6">
-		 <div class="row">
-			  <div class="col-md-12">
-				  <?php
-					  echo "<div  class='building-heading'><h1>" . $building->name . "</h1></div>";
-				  ?>
-			  </div>
-			  <div class="col-md-12">
-				  <?php
-					  echo "<div class='information-container'><p>" . $building->description . "</p></div>";
-				  ?>
-			  </div>
-		  </div>       
+    <div class="wrapper">
+		<div class="container">
+			<div class="col-md-6">
+			 <div class="row">
+				  <div class="col-md-12">
+					  <?php
+						  echo "<div  class='building-heading'><h1>" . $building->name . "</h1></div>";
+					  ?>
+				  </div>
+				  <div class="col-md-12">
+					  <?php
+						  echo "<div class='information-container'><p>" . $building->description . "</p></div>";
+					  ?>
+				  </div>
+			  </div>       
+			</div>
+			<?php
+				echo "<div class='cover col-md-6' style='background-image: url(" . $building->images[0] . ") '></div>";
+			?>
 		</div>
-		<?php
-			echo "<div class='cover col-md-6' style='background-image: url(" . $building->images[0] . ") '></div>";
-		?>
-	</div>
+    </div>    
 	<?php
 		$location = explode(',', $building->location);
 		echo "<input id='lat' readonly value='".$location[0]."' />";
 		echo "<input id='lng' readonly value='".$location[1]."' />";
 	?>
 	<div id="map"></div>
-	<div class="gallery">
+	<div class="gallery row">
 		<?php 
 			foreach( $building->images as $image ) {
-				echo "<div class='gallery-image-wrapper'><a href='".$image."'><img class='gallery-image' src='".$image."' > </a></div>";
+				echo "<a class='col-md-3 image-wrapper' href='".$image."'><img class='gallery-image' src='".$image."' > </a>";
 			}
 		?>
 	</div>
